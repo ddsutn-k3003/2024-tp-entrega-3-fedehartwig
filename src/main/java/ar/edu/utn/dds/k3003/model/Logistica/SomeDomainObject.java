@@ -1,4 +1,4 @@
-package ar.edu.utn.dds.k3003.model;
+package ar.edu.utn.dds.k3003.model.logistica;
 
 import ar.edu.utn.dds.k3003.model.exceptions.SomeDomainException;
 import java.util.Objects;
@@ -12,7 +12,13 @@ public class SomeDomainObject {
   private Long otherAttribute;
 
   public SomeDomainObject sum(SomeDomainObject other) {
-
+    if (Objects.isNull(other.getAnAttribute())) {
+        try {
+            throw new SomeDomainException("anAttribute is null", other);
+        } catch (SomeDomainException e) {
+            throw new RuntimeException(e);
+        }
+    }
     return new SomeDomainObject(
         anAttribute + other.getAnAttribute(), otherAttribute + other.getOtherAttribute());
   }
