@@ -21,6 +21,8 @@ public class WebApp {
 
         var env = System.getenv();
         var objectMapper = createObjectMapper();
+
+
         var fachada = new Fachada();
         fachada.setViandasProxy(new ViandasProxy(objectMapper));
 
@@ -35,6 +37,7 @@ public class WebApp {
         var rutaController = new RutaController(fachada);
         var trasladosController = new TrasladoController(fachada);
 
+        app.get("/", ctx -> ctx.result("Home"));
         app.post("/rutas", rutaController::agregar);
         app.post("/traslados", trasladosController::asignar);
         app.get("/traslados/{id}", trasladosController::obtener);
