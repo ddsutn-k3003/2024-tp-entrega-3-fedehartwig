@@ -3,25 +3,47 @@ package ar.edu.utn.dds.k3003.repositories;
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoTrasladoEnum;
 import ar.edu.utn.dds.k3003.model.Ruta;
 import ar.edu.utn.dds.k3003.model.Traslado;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Getter
+@Setter
 public class TrasladoRepository {
 
     private static AtomicLong seqId = new AtomicLong();
 
+    private EntityManager entityManager;
+
     private Collection<Traslado> traslados;
+
+    public TrasladoRepository(EntityManager entityManager){
+        super();
+        this.entityManager = entityManager;
+    }
 
     public TrasladoRepository(){
         this.traslados = new ArrayList<>();
     }
 
     public Traslado save(Traslado traslado) {
-        if (Objects.isNull(traslado.getId())) {
+        /*if (Objects.isNull(traslado.getId())) {
             traslado.setId(seqId.getAndIncrement());
             this.traslados.add(traslado);
+        }
+
+         */
+        if (Objects.isNull(traslado.getId())) {
+            this.entityManager.persist(traslado);
+
         }
         return traslado;
     }
@@ -33,6 +55,16 @@ public class TrasladoRepository {
         ));
     }
 
+    public List<Traslado> findByColaborador (Long colaboradorId){
+
+        List<Traslado> traslados = entityManager.createQuery("SELECT c FROM Traslado c WHERE c.colaboradorId = : colaboradorID", Traslado.class)
+                .setParameter("colaboradorID", colaboradorId)
+                .getResultList();
+
+        return traslados;
+    }
+
+    /*
     public Traslado actualizarTrasladoRetirado(Long id){
         Traslado trasladoActualizar = findById(id);
         Traslado trasladoBase = new Traslado(trasladoActualizar.getQrVianda(), EstadoTrasladoEnum.EN_VIAJE, LocalDateTime.now(), trasladoActualizar.getHeladeraOrigen(), trasladoActualizar.getHeladeraDestino());
@@ -50,4 +82,5 @@ public class TrasladoRepository {
         trasladoGuardar.setId(id);
         return trasladoBase;
     }
+    */
 }

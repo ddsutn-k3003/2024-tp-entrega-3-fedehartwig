@@ -6,27 +6,47 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Traslado {
-    private Long id;
-    private final String qrVianda;
-    private final EstadoTrasladoEnum status;
-    private final LocalDateTime fechaTraslado;
-    private final Integer heladeraOrigen;
-    private final Integer heladeraDestino;
-    private Long colaboradorId;
 
-    public Traslado(String qrVianda, Integer heladeraOrigen, Integer heladeraDestino) {
-        this(qrVianda, EstadoTrasladoEnum.CREADO, LocalDateTime.now(), heladeraOrigen, heladeraDestino);
+@Entity
+@Table(name = "traslado")
+public class Traslado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    private String qrVianda;
+
+    @OneToOne
+    @JoinColumn(name = "ruta_id", referencedColumnName = "id")
+    private Ruta ruta;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EstadoTrasladoEnum status;
+    @Column
+    private LocalDateTime fechaTraslado;
+    @Column
+    private Long colaboradorId;
+    @Column
+    private Integer heladeraOrigen;
+    @Column
+    private Integer heladeraDestino;
+
+    protected Traslado(){
+        super();
     }
 
-    public Traslado(String qrVianda, EstadoTrasladoEnum status, LocalDateTime fechaTraslado, Integer heladeraOrigen, Integer heladeraDestino) {
+    public Traslado(String qrVianda, EstadoTrasladoEnum status, LocalDateTime fechaTraslado,  Ruta ruta, Integer heladeraOrigen, Integer heladeraDestino) {
         this.qrVianda = qrVianda;
+        this.ruta = ruta;
         this.status = status;
         this.fechaTraslado = fechaTraslado;
+        this.colaboradorId = ruta.getColaboradorId();
         this.heladeraOrigen = heladeraOrigen;
         this.heladeraDestino = heladeraDestino;
     }

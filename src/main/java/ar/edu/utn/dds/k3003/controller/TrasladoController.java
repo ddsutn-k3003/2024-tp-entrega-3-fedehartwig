@@ -5,6 +5,8 @@ import ar.edu.utn.dds.k3003.facades.dtos.TrasladoDTO;
 import ar.edu.utn.dds.k3003.facades.exceptions.TrasladoNoAsignableException;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+
+import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
 
 public class TrasladoController {
@@ -37,4 +39,16 @@ public class TrasladoController {
       context.status(HttpStatus.NOT_FOUND);
     }
   }
+
+  public void trasladosColaborador(Context context){
+    var id = context.queryParamAsClass("colaboradorId", Long.class).get();
+    try {
+      var listaDeTraslados = this.fachada.trasladosDeColaborador(id, LocalDateTime.now().getMonthValue(), LocalDateTime.now().getYear());
+      context.json(listaDeTraslados);
+    } catch (NoSuchElementException ex) {
+      context.result(ex.getLocalizedMessage());
+      context.status(HttpStatus.NOT_FOUND);
+    }
+  }
+
 }

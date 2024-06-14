@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 public class TrasladoMapper {
 
     public TrasladoDTO map(Traslado traslado) {
-        TrasladoDTO trasladoDTO = new TrasladoDTO(traslado.getQrVianda(),traslado.getStatus(),traslado.getFechaTraslado(),traslado.getHeladeraOrigen(),traslado.getHeladeraDestino());
+        TrasladoDTO trasladoDTO = new TrasladoDTO(traslado.getQrVianda(),traslado.getStatus(),traslado.getFechaTraslado(),traslado.getRuta().getHeladeraIdOrigen(),
+                traslado.getRuta().getHeladeraIdDestino());
 
         trasladoDTO.setId(traslado.getId());
         trasladoDTO.setColaboradorId(traslado.getColaboradorId());

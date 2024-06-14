@@ -4,8 +4,10 @@ import ar.edu.utn.dds.k3003.app.Fachada;
 import ar.edu.utn.dds.k3003.facades.dtos.RutaDTO;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import javax.persistence.EntityManagerFactory;
 
 public class RutaController {
+  private EntityManagerFactory entityManagerFactory;
 
   private final Fachada fachada;
 
