@@ -37,9 +37,10 @@ public class ViandasProxy implements FachadaViandas {
   }
 
   @Override
-  public ViandaDTO modificarEstado(String s, EstadoViandaEnum estadoViandaEnum)
-          throws NoSuchElementException {
-    return null;
+  public ViandaDTO modificarEstado(String s, EstadoViandaEnum estadoViandaEnum){
+        ViandaDTO vianda = this.buscarXQR(s);
+        vianda.setEstado(estadoViandaEnum);
+        return vianda;
   }
 
   @Override

@@ -28,7 +28,7 @@ public class Traslado {
     @Column
     @Enumerated(EnumType.STRING)
     private EstadoTrasladoEnum status;
-    @Column
+    @Column (name = "fechatraslado")
     private LocalDateTime fechaTraslado;
     @Column
     private Long colaboradorId;
