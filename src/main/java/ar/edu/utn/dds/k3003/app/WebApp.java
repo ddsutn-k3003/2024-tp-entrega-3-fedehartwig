@@ -35,8 +35,10 @@ public class WebApp {
         var URL_COLABORADORES = env.get("URL_COLABORADORES");
 
 
+
+
         var objectMapper = createObjectMapper();
-        var fachada = new Fachada(entityManagerFactory);
+        var fachada = new Fachada();
 
         var port = Integer.parseInt(env.getOrDefault("PORT", "8080"));
 

@@ -41,7 +41,7 @@ public class Tests{
     private static final String QR_VIANDA = "123";
     private static final int HELADERA_ORIGEN = 1;
     private static final int HELADERA_DESTINO = 2;
-    private TrasladoRepository trasladoRepository;
+    private final TrasladoRepository trasladoRepository;
 
     @Mock
     FachadaViandas fachadaViandas;

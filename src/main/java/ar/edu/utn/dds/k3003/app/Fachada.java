@@ -20,13 +20,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.*;
 
+import static ar.edu.utn.dds.k3003.repositories.auxiliar.PersistenceUtils.createEntityManagerFactory;
+
 @Setter
 @Getter
 
 public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
 
-    private EntityManagerFactory entityManagerFactory;
-
+    private final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
     private final RutaRepository rutaRepository;
     private final RutaMapper rutaMapper;
     private final HeladeraRepository heladeraRepository;
@@ -40,8 +41,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
     private FachadaViandas fachadaViandas;
     private FachadaHeladeras fachadaHeladeras;
 
-    public Fachada(EntityManagerFactory entityManagerFactory) {
-        this.entityManagerFactory = entityManagerFactory;
+    public Fachada() {
         this.rutaRepository = new RutaRepository();
         this.rutaMapper = new RutaMapper();
         this.trasladoMapper = new TrasladoMapper();
