@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>ar.edu.utn.dds.k3003</groupId>
   <artifactId>my-app-name</artifactId>
@@ -10,13 +8,12 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- Dependencies versions -->
+    <!--  Dependencies versions  -->
     <javalin.version>5.6.5</javalin.version>
     <junit.version>5.10.2</junit.version>
     <mockito.version>5.11.0</mockito.version>
     <retrofit.version>2.11.0</retrofit.version>
     <slf4j.version>2.0.13</slf4j.version>
-    <flyway.version>9.8.3</flyway.version> <!-- Agrega la versión de Flyway -->
   </properties>
   <build>
     <plugins>
@@ -33,7 +30,7 @@
     </plugins>
   </build>
   <dependencies>
-    <!-- Libs -->
+    <!--  Libs  -->
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
@@ -69,14 +66,14 @@
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
-    <!-- Tools -->
+    <!--  Tools  -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.32</version>
       <scope>provided</scope>
     </dependency>
-    <!-- Test -->
+    <!--  Test -->
     <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
@@ -111,18 +108,6 @@
       <groupId>org.glassfish</groupId>
       <artifactId>javax.el</artifactId>
       <version>3.0.0</version>
-    </dependency>
-    <!-- Flyway -->
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <version>${flyway.version}</version>
-    </dependency>
-    <!-- Agente APM -->
-    <dependency>
-      <groupId>co.elastic.apm</groupId>
-      <artifactId>elastic-apm-agent</artifactId>
-      <version>1.37.0</version>
     </dependency>
   </dependencies>
   <repositories>
