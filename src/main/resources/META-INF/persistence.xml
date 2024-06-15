@@ -9,11 +9,10 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
 
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.default_schema" value="public"/>
-            <property name="hibernate.archive.autodetection" value="class"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="use_sql_comments" value="true"/>
+            <property name="hibernate.archive.autodetection" value="class" />
+            <property name="hibernate.format_sql" value="true" />
+            <property name="use_sql_comments" value="true" />
         </properties>
 
     </persistence-unit>

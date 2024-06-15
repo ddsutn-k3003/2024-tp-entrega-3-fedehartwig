@@ -21,22 +21,16 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class WebApp {
-    public static EntityManagerFactory entityManagerFactory;
-
     public static void main(String[] args) {
-        startEntityManagerFactory();
-
 
         var env = System.getenv();
         // Variables de entorno
-        var URL_VIANDAS = env.get("URL_VIANDAS");
+        /*
+        var URL_VIANDAS = env.getOrDefault("URL_VIANDAS", "localhost:/");
         var URL_LOGISTICA = env.get("URL_LOGISTICA");
         var URL_HELADERAS = env.get("URL_HELADERAS");
         var URL_COLABORADORES = env.get("URL_COLABORADORES");
-
-
-
-
+        */
         var objectMapper = createObjectMapper();
         var fachada = new Fachada();
 
@@ -47,7 +41,6 @@ public class WebApp {
                 configureObjectMapper(mapper);
             }));
         }).start(port);
-
 
         fachada.setViandasProxy(new ViandasProxy(objectMapper));
         fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
@@ -60,22 +53,6 @@ public class WebApp {
         app.get("/traslados/search/findByColaboradorId", trasladosController::trasladosColaborador);
         app.post("/traslados", trasladosController::asignar);
         app.get("/traslados/{id}", trasladosController::obtener);
-    }
-
-    public static void startEntityManagerFactory() {
-// https://stackoverflow.com/questions/8836834/read-environment-variables-in-persistence-xml-file
-        Map<String, String> env = System.getenv();
-        Map<String, Object> configOverrides = new HashMap<String, Object>();
-        String[] keys = new String[] { "javax.persistence.jdbc.url", "javax.persistence.jdbc.user",
-                "javax.persistence.jdbc.password", "javax.persistence.jdbc.driver", "hibernate.hbm2ddl.auto",
-                "hibernate.connection.pool_size", "hibernate.show_sql" };
-        for (String key : keys) {
-            if (env.containsKey(key)) {
-                String value = env.get(key);
-                configOverrides.put(key, value);
-            }
-        }
-        entityManagerFactory = Persistence.createEntityManagerFactory("db", configOverrides);
     }
 
     public static ObjectMapper createObjectMapper() {
