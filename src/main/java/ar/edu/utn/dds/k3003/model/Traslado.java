@@ -1,6 +1,7 @@
 package ar.edu.utn.dds.k3003.model;
 
 import ar.edu.utn.dds.k3003.facades.dtos.EstadoTrasladoEnum;
+import ar.edu.utn.dds.k3003.facades.dtos.TrasladoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,7 @@ public class Traslado {
     @Column
     @Enumerated(EnumType.STRING)
     private EstadoTrasladoEnum status;
-    @Column (name = "fechatraslado")
+    @Column
     private LocalDateTime fechaTraslado;
     @Column
     private Long colaboradorId;
@@ -51,4 +52,13 @@ public class Traslado {
         this.heladeraDestino = heladeraDestino;
     }
 
+    public Traslado(TrasladoDTO traslado, Ruta ruta) {
+        this.qrVianda = traslado.getQrVianda();
+        this.ruta = ruta;
+        this.status = traslado.getStatus();
+        this.fechaTraslado = traslado.getFechaTraslado();
+        this.colaboradorId = traslado.getColaboradorId();
+        this.heladeraOrigen = traslado.getHeladeraOrigen();
+        this.heladeraDestino = traslado.getHeladeraDestino();
+    }
 }

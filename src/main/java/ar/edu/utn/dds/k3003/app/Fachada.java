@@ -27,7 +27,8 @@ import static ar.edu.utn.dds.k3003.repositories.auxiliar.PersistenceUtils.create
 
 public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
 
-    private static final EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
+    private final static EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
+
     private final RutaRepository rutaRepository;
     private final RutaMapper rutaMapper;
     private final HeladeraRepository heladeraRepository;
@@ -53,6 +54,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
         this.viandaMapper = new ViandaMapper();
         this.viandaRepository = new ViandaRepository();
     }
+
 
     @Override
     public RutaDTO agregar(RutaDTO rutaDTO) {
@@ -122,7 +124,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
         }
 
 
-        Traslado trasladoNuevo = new Traslado(traslado.getQrVianda(), EstadoTrasladoEnum.ASIGNADO, traslado.getFechaTraslado(), rutasPosibles.get(0), traslado.getHeladeraDestino(), traslado.getHeladeraOrigen());
+        Traslado trasladoNuevo = new Traslado(traslado, rutasPosibles.get(0));
 
 
         this.trasladoRepository.save(trasladoNuevo);

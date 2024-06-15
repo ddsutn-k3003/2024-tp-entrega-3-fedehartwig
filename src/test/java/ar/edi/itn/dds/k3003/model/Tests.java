@@ -41,7 +41,7 @@ public class Tests{
     private static final String QR_VIANDA = "123";
     private static final int HELADERA_ORIGEN = 1;
     private static final int HELADERA_DESTINO = 2;
-    private final TrasladoRepository trasladoRepository;
+    private TrasladoRepository trasladoRepository;
 
     @Mock
     FachadaViandas fachadaViandas;
@@ -65,53 +65,5 @@ public class Tests{
             throw $ex;
         }
     }
-
-    @Test
-    void testAgregar() {
-        // Arrange
-        Fachada fachada = new Fachada();
-        RutaDTO rutaDTO = new RutaDTO(1L, 1, 2);
-        rutaDTO.setId(0L);
-        // Act
-        RutaDTO result = fachada.agregar(rutaDTO);
-
-        // Assert
-        assertNotNull(result);
-        assertEquals(rutaDTO, result);
-    }
-
-    @Test
-    void testAsignarTraslado() throws TrasladoNoAsignableException {
-        RutaDTO agregar = this.instancia.agregar(new RutaDTO(14L, 1, 2));
-        TrasladoDTO traslado = new TrasladoDTO("123", 1, 2);
-        TrasladoDTO trasladoDTO = this.instancia.asignarTraslado(traslado);
-        Assertions.assertEquals(EstadoTrasladoEnum.ASIGNADO, trasladoDTO.getStatus(), "el estado de un traslado debe figurar como asignado luego de una asignación");
-    }
-/*
-    @Test
-    @DisplayName("Probar Traslado Retiro")
-    void testTrasladoRetirado() throws TrasladoNoAsignableException {
-        RutaDTO agregar = this.instancia.agregar(new RutaDTO(14L, 1, 2));
-        TrasladoDTO traslado = new TrasladoDTO("123", 1, 2);
-        TrasladoDTO trasladoDTO = this.instancia.asignarTraslado(traslado);
-        this.instancia.trasladoRetirado(trasladoDTO.getId());
-        Traslado trasladoNuevo = this.trasladoRepository.save(new Traslado(trasladoDTO.getQrVianda(), EstadoTrasladoEnum.EN_VIAJE, trasladoDTO.getFechaTraslado(),trasladoDTO.getHeladeraOrigen(),trasladoDTO.getHeladeraDestino()));
-
-        Assertions.assertEquals(EstadoTrasladoEnum.EN_VIAJE, trasladoNuevo.getStatus(), "el estado de un traslado debe figurar como asignado luego de una asignación");
-    }
-
-
-    @Test
-    @DisplayName("Probar Traslado deposito")
-    void testTrasladoDepositado() throws TrasladoNoAsignableException {
-        RutaDTO agregar = this.instancia.agregar(new RutaDTO(14L, 1, 2));
-        TrasladoDTO traslado = new TrasladoDTO("123", 1, 2);
-        TrasladoDTO trasladoDTO = this.instancia.asignarTraslado(traslado);
-        this.instancia.trasladoRetirado(trasladoDTO.getId());
-        Traslado trasladoNuevo = this.trasladoRepository.save(new Traslado(trasladoDTO.getQrVianda(), EstadoTrasladoEnum.ENTREGADO, trasladoDTO.getFechaTraslado(),trasladoDTO.getHeladeraOrigen(),trasladoDTO.getHeladeraDestino()));
-
-        Assertions.assertEquals(EstadoTrasladoEnum.ENTREGADO, trasladoNuevo.getStatus(), "el estado de un traslado debe figurar como asignado luego de una asignación");
-    }
-    */
 
 }

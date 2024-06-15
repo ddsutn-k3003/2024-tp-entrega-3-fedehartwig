@@ -21,15 +21,19 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class WebApp {
+
+
     public static void main(String[] args) {
+
+
 
         var env = System.getenv();
         // Variables de entorno
-
         var URL_VIANDAS = env.get("URL_VIANDAS");
         var URL_LOGISTICA = env.get("URL_LOGISTICA");
         var URL_HELADERAS = env.get("URL_HELADERAS");
         var URL_COLABORADORES = env.get("URL_COLABORADORES");
+
 
         var objectMapper = createObjectMapper();
         var fachada = new Fachada();
@@ -41,6 +45,7 @@ public class WebApp {
                 configureObjectMapper(mapper);
             }));
         }).start(port);
+
 
         fachada.setViandasProxy(new ViandasProxy(objectMapper));
         fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
