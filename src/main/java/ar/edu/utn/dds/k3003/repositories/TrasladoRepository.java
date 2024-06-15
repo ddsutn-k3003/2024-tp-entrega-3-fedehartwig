@@ -57,8 +57,8 @@ public class TrasladoRepository {
 
     public List<Traslado> findByColaborador (Long colaboradorId){
 
-        List<Traslado> traslados = entityManager.createQuery("SELECT c FROM Traslado c WHERE c.colaboradorId = : colaboradorID", Traslado.class)
-                .setParameter("colaboradorID", colaboradorId)
+        List<Traslado> traslados = entityManager.createQuery("SELECT c FROM Traslado c WHERE c.colaboradorId = : colaboradorId", Traslado.class)
+                .setParameter("colaboradorId", colaboradorId)
                 .getResultList();
 
         return traslados;

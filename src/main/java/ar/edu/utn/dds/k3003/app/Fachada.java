@@ -22,6 +22,7 @@ import java.util.*;
 
 import static ar.edu.utn.dds.k3003.repositories.auxiliar.PersistenceUtils.createEntityManagerFactory;
 
+import javax.persistence.EntityManager;
 @Setter
 @Getter
 
@@ -152,6 +153,7 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
         trasladoRepository.getEntityManager().getTransaction().commit();
         trasladoRepository.getEntityManager().close();
 
+
         return trasladosDeColaborador.stream().map(trasladoMapper::map).toList();
 
     }
@@ -263,4 +265,14 @@ public class Fachada implements ar.edu.utn.dds.k3003.facades.FachadaLogistica {
     }
 
 
+    public void borrar() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("TRUNCATE TABLE Ruta").executeUpdate();
+        entityManager.createNativeQuery("TRUNCATE TABLE Traslado").executeUpdate();
+        entityManager.getTransaction().commit();
+
+
+    }
 }

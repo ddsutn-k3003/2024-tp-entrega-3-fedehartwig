@@ -4,6 +4,7 @@ import ar.edu.utn.dds.k3003.app.Fachada;
 import ar.edu.utn.dds.k3003.facades.dtos.TrasladoDTO;
 import ar.edu.utn.dds.k3003.facades.exceptions.TrasladoNoAsignableException;
 import io.javalin.http.Context;
+import io.javalin.http.Handler;
 import io.javalin.http.HttpStatus;
 
 import java.time.LocalDateTime;
@@ -37,6 +38,15 @@ public class TrasladoController {
     } catch (NoSuchElementException ex) {
       context.result(ex.getLocalizedMessage());
       context.status(HttpStatus.NOT_FOUND);
+    }
+  }
+
+
+  public void borrar(Context context) {
+    try {
+      fachada.borrar();
+    } catch (Exception e) {
+      System.out.println("Error al borrar la base de datos: " + e.getMessage());
     }
   }
 
