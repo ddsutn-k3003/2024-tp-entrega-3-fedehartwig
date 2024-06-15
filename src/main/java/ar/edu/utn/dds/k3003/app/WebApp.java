@@ -40,15 +40,14 @@ public class WebApp {
 
         var port = Integer.parseInt(env.getOrDefault("PORT", "8080"));
 
+        fachada.setViandasProxy(new ViandasProxy(objectMapper));
+        fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
+
         var app = Javalin.create(config -> {
             config.jsonMapper(new JavalinJackson().updateMapper(mapper -> {
                 configureObjectMapper(mapper);
             }));
         }).start(port);
-
-
-        fachada.setViandasProxy(new ViandasProxy(objectMapper));
-        fachada.setHeladerasProxy(new HeladerasProxy(objectMapper));
 
         var rutaController = new RutaController(fachada);
         var trasladosController = new TrasladoController(fachada);
