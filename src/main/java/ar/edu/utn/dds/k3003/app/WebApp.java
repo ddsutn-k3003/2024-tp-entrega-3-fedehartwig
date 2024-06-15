@@ -25,12 +25,12 @@ public class WebApp {
 
         var env = System.getenv();
         // Variables de entorno
-        
-        var URL_VIANDAS = env.getOrDefault("URL_VIANDAS", "http://localhost:8081");
-        var URL_LOGISTICA = env.getOrDefault("URL_LOGISTICA", "http://localhost:8082");
-        var URL_HELADERAS = env.getOrDefault("URL_HELADERAS", "http://localhost:8083");
-        var URL_COLABORADORES = env.getOrDefault("URL_COLABORADORES", "http://localhost:8084");
-        
+
+        var URL_VIANDAS = env.get("URL_VIANDAS");
+        var URL_LOGISTICA = env.get("URL_LOGISTICA");
+        var URL_HELADERAS = env.get("URL_HELADERAS");
+        var URL_COLABORADORES = env.get("URL_COLABORADORES");
+
         var objectMapper = createObjectMapper();
         var fachada = new Fachada();
 
